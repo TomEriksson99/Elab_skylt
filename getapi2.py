@@ -33,13 +33,3 @@ def get_apidata2(link_real):
     except:
         pass
 
-
-     
-
-#print(buss_data)
-#print("T-baneavgångar")
-#for i in range(len(tbana)):
-#    print(tbana[i])
-#print("Bussavgångar")
-#for i in range(len(buss)):
-#    print(buss[i])  
