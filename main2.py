@@ -7,9 +7,13 @@ from PIL import ImageTk,Image
 import math
 import tkinter.font as tkFont
 import time
+import os
 
 import requests
 from getapi2 import get_apidata2
+
+#if os.environ.get('DISPLAY','')=='':
+#    os.environ.__setitem__('DISPLAY',':0.0')
 
 def update_screen(canvas, data, img_buss, img_buss_red, img_tbana, fontExample):
     try:
@@ -26,11 +30,11 @@ def update_screen(canvas, data, img_buss, img_buss_red, img_tbana, fontExample):
         buss_nr_hori = 152
         buss_nr_vert = 62
 
-        buss_namn_hori = 260
+        buss_namn_hori = 225
         buss_namn_vert = buss_nr_vert
 
-        buss_times_hori = 680
-        buss_times_period = 130
+        buss_times_hori = 660
+        buss_times_period = 145
         buss_times_vert = buss_nr_vert
 
         t_bana_nr_hori = 100
@@ -91,7 +95,7 @@ def update_screen(canvas, data, img_buss, img_buss_red, img_tbana, fontExample):
                     col = t_column[index] + 1
                     t_column[index] = col
             else:
-                index = len(t_lineorder)
+                index = len(t_lineorder)            
                 t_lineorder.append(temp[1])
                 t_column.append(0)
                 col = 0
@@ -144,20 +148,21 @@ def reduce_min(data):
 
 def main():
     root = Tk() 
-    #root.attributes('-fullscreen', True)
+    root.attributes('-fullscreen', True)
     canvas = Canvas(root, width = 1024, height = 1280)  
     canvas.pack()  
 
-    fontExample = tkFont.Font(family="Calibri", size=26, weight="bold")
+    fontExample = tkFont.Font(family="Calibri", size=22, weight="bold")
 
     size_vert = 128# 98*(1024/768)
     size_hori = 1024 #768*(1024/768)
+    dir = "/home/trainpi/Project/" 
 
-    img_n = Image.open("buss_3_red.png")
+    img_n = Image.open("Buss_3_red.png")
     img_r = img_n.resize((size_hori, size_vert))  
     img_tbana = ImageTk.PhotoImage(img_r)
 
-    img_n1 = Image.open("Buss_2.png")
+    img_n1 = Image.open(dir+"Buss_2.png")
     img_r1 = img_n1.resize((size_hori, size_vert))   
     img_buss = ImageTk.PhotoImage(img_r1)
 
@@ -178,7 +183,7 @@ def main():
             for i in range(1):
                 time.sleep(2)
                 update_screen(canvas, data, img_buss, img_buss_red, img_tbana, fontExample)
-                #print("screen update")
+                print("screen update")
         
 main()
 
